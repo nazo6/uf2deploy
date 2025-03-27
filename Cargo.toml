@@ -5,6 +5,7 @@ edition = "2024"
 authors = ["nazo6"]
 license = "MIT"
 repository = "https://github.com/nazo6/uf2deploy"
+description = "cargo runner to convert elf to uf2 and deploy to device"
 
 [dependencies]
 clap = { version = "4.5.20", features = ["derive"] }
