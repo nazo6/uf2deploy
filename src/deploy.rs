@@ -1,12 +1,5 @@
 use std::path::{Path, PathBuf};
 
-use duct::cmd;
-
-pub fn deploy_probe(elf_path: &PathBuf) -> anyhow::Result<()> {
-    let _ = cmd!("probe-rs", "run", elf_path).run()?;
-    Ok(())
-}
-
 pub fn deploy_uf2(
     deploy_path_args: String,
     uf2_path: PathBuf,

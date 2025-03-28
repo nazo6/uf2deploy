@@ -19,6 +19,7 @@ pub struct Cli {
 
 #[derive(Clone, Debug, Subcommand)]
 pub enum Commands {
+    /// Generate UF2 file from ELF file and optionally deploy it.
     Deploy {
         /// UF2 family name or hex.
         /// To see available families, run `list-families` subcommand.
@@ -45,11 +46,7 @@ pub enum Commands {
         /// Path of elf file. Usually passed by `cargo run`.
         elf_path: String,
     },
-    DeployProbe {
-        /// Path of elf file. Usually passed by `cargo run`.
-        #[arg(last = true)]
-        elf_path: String,
-    },
+    /// Show available UF2 families.
     ListFamilies,
 }
 
@@ -86,10 +83,6 @@ pub fn main() -> anyhow::Result<()> {
             } else {
                 eprintln!("Path is not specified. Skipping deploy.",);
             }
-        }
-        Commands::DeployProbe { elf_path } => {
-            let elf_path = dunce::canonicalize(PathBuf::from(elf_path))?;
-            deploy::deploy_probe(&elf_path)?;
         }
         Commands::ListFamilies => {
             let table = UF2_PRESETS
